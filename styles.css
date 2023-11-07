@@ -1,17 +1,23 @@
 #map {
     margin: 0;
     height: 100vh;
-    }
+}
 
 body {
     margin: 0;
- }
+}
 
 .camada_ottobacias {
     fill: #0b9bd4;
     fill-opacity: 0.1;
     stroke: #04cefd;
     stroke-width: 0.5;
+}
+
+.camada_ottotrechos {
+    stroke: rgb(0, 50, 200);
+    stroke-width: 1;
+    stroke-opacity: 0.5;
 }
 
 .camada_ottobacias_montante {
