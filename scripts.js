@@ -1,15 +1,13 @@
 function onEachFeature(feature, layer) {
     layer.on('click', function (e) {
         var cobaciaValue = feature.properties.cobacia;
-        console.log("Tipo de cobaciaValue: " + typeof cobaciaValue);
-
         var cobaciaEdit = cobaciaValue;
+
         while (cobaciaEdit.length > 0 && parseInt(cobaciaEdit.slice(-1)) % 2 !== 0) {
             cobaciaEdit = cobaciaEdit.slice(0, -1); // Remove o último dígito
         };
-    
+
         var popupContent = "CobaciaValue: "+cobaciaValue+"<br>CobaciaEdit: "+cobaciaEdit;
-        
         L.popup()
             .setLatLng(e.latlng)
             .setContent(popupContent)
@@ -22,14 +20,6 @@ function onEachFeature(feature, layer) {
             CQL_FILTER: "cobacia LIKE '"+cobaciaEdit+"%' AND cobacia > '"+cobaciaValue+"';"
         });
         ottobaciasMontante.addTo(map);
-        
-        var ottobaciaSelecionada = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
-            layers: 'teste_shapefile:ottobacias_iguacu_5k',
-            fitLayer: false,
-            className: 'camada_ottobacias_selecionada',
-            CQL_FILTER: "cobacia LIKE '"+cobaciaValue+"';"
-        });
-        ottobaciaSelecionada.addTo(map);
     });
 }
 
@@ -67,7 +57,7 @@ var ottobacias = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
 var map = L.map('map', {
     center: [-15, -51.5],
     zoom: 4,
-    layers: [baseGoogleStreets, ottobacias, ottotrechos]
+    layers: [baseGoogleStreets, ottotrechos, ottobacias]
 });
 
 var baseMaps = {
