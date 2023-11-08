@@ -10,13 +10,13 @@ body {
 .camada_ottobacias {
     fill: #0b9bd4;
     fill-opacity: 0.2;
-    stroke: rgb(0, 0, 180);
+    stroke: rgb(0, 0, 0);
     stroke-width: 0.2;
 }
 
 .camada_ottotrechos {
     stroke: rgb(0, 0, 255);
-    stroke-width: 1;
+    stroke-width: 1.5;
     stroke-opacity: 0.5;
 }
 
