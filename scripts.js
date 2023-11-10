@@ -6,12 +6,6 @@ function onEachFeature(feature, layer) {
         while (cobaciaEdit.length > 0 && parseInt(cobaciaEdit.slice(-1)) % 2 !== 0) {
             cobaciaEdit = cobaciaEdit.slice(0, -1);
         };
-
-        var popupContent = "CobaciaValue: "+cobaciaValue+typeof cobaciaValue+"<br>CobaciaEdit: "+cobaciaEdit+typeof cobaciaValue;
-        L.popup()
-            .setLatLng(e.latlng)
-            .setContent(popupContent)
-            .openOn(map);
         
         var ottobaciasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
             layers: 'hidrogis:ottobacias_AI_IG6_ISR',
@@ -43,6 +37,13 @@ var baseGoogleStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y
 });
 
 
+var ottotrechos = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
+    layers: 'hidrogis:ottotrechos_AI_IG6',
+    className: 'camada_ottotrechos',
+    attribution: 'ANA'
+});
+
+
 var ottobacias = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
     layers: 'hidrogis:ottobacias_AI_IG6_ISR',
     className: 'camada_ottobacias',
@@ -50,18 +51,11 @@ var ottobacias = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
     onEachFeature: onEachFeature
 });
 
-/*
-var ottotrechos = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
-    layers: 'hidrogis:ottotrechos_AI_IG6',
-    //className: 'camada_ottotrechos',
-    attribution: 'ANA'
-});
-*/
 
 var map = L.map('map', {
     center: [-15, -51.5],
     zoom: 4,
-    layers: [baseOpenStreetMap, /*ottotrechos,*/ ottobacias]
+    layers: [baseOpenStreetMap, ottotrechos, ottobacias]
 });
 
 var baseMaps = {
@@ -71,8 +65,8 @@ var baseMaps = {
 };
 
 var overlayMaps = {
-    "Ottobacias": ottobacias
-    /*"Ottotrechos": ottotrechos*/
+    "Ottobacias": ottobacias,
+    "Ottotrechos": ottotrechos
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps);
