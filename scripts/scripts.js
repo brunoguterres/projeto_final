@@ -14,13 +14,28 @@ function onEachFeature(feature, layer) {
         
         var ottobaciasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
             layers: 'hidrogis:ottobacias_AI_IG6_ISR',
-            fitLayer: false,
+            fitLayer: true,
             className: 'camada_ottobacias_montante',
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'"
         });
         ottobaciasMontante.addTo(map);
     });
 }
+
+function updateLegend() {
+    var legendContent = '<div class="legend-title">Legenda</div>';
+    
+    // Adicione os itens da legenda para Ottobacias
+    legendContent += '<div class="legend-item">Ottobacias: <span style="background-color: rgb(0, 150, 255); opacity: 0.5;"></span></div>';
+    
+    // Adicione os itens da legenda para Ottotrechos
+    legendContent += '<div class="legend-item">Ottotrechos: <span style="border: 1.5px solid rgb(0, 0, 255); opacity: 0.5;"></span></div>';
+    
+    // Atualize a div da legenda com o conteúdo
+    $('#legend').html(legendContent);
+}
+
+updateLegend();
 
 var baseOpenStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -77,3 +92,7 @@ var overlayMaps = {
 var layerControl = L.control.layers(baseMaps, overlayMaps);
 
 layerControl.addTo(map);
+
+L.control.scale({
+    position: 'bottomright'  // Posição no canto inferior direito
+}).addTo(map);

@@ -9,8 +9,12 @@ body {
 }
 
 header {
-    text-align: center;
+    margin: 0;
     height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 112, 150);
 }
 
 .logo {
@@ -19,15 +23,19 @@ header {
 }
 
 nav {
-    text-align: center;
-    background-color: #f2f2f2;
     height: 5vh;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 nav li {
@@ -37,7 +45,19 @@ nav li {
 
 nav a {
     text-decoration: none;
-    color: #333;
+    color: rgb(150, 150, 150);
+    /*font-weight: bold;*/
+    font-family: sans-serif;
+    transition: 0.3;
+}
+
+nav a:hover {
+    color: rgb(0, 0, 255);
+    font-weight: bold;
+}
+
+nav a:active {
+    color: rgb(0, 0, 0); /* Cor para a opção selecionada */
     font-weight: bold;
 }
 
@@ -60,4 +80,24 @@ nav a {
     fill-opacity: 0.3;
     stroke: rgb(200, 100, 0);
     stroke-width: 1;
+}
+
+#legend {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    max-width: 200px;
+}
+
+.legend-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.legend-item {
+    margin-bottom: 5px;
 }
