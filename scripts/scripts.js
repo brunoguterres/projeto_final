@@ -15,6 +15,15 @@ function onEachFeature(feature, layer) {
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'"
         });
         ottobaciasMontante.addTo(map);
+
+        var outorgasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
+            layers: 'hidrogis:outorgas_AI_IG6_CNARH',
+            fitLayer: false,
+            //className: 'camada_ottobacias_montante',
+            attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
+            CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'"
+        });
+        outorgasMontante.addTo(map);
     });
 }
 
