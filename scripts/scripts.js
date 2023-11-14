@@ -1,17 +1,22 @@
 function onEachFeature(feature, layer) {
     layer.on('click', function (e) {
-        var cobaciaValue = feature.properties.cobacia;
+        var cobaciaValue = feature.properties.cobacia_n;
         var cobaciaEdit = cobaciaValue;
 
-        while (cobaciaEdit.length > 0 && parseInt(cobaciaEdit.slice(-1)) % 2 !== 0) {
+        console.log("cobaciaValue: ",cobaciaValue)
+        console.log("cobaciaEdit: ",cobaciaEdit)
+
+        while (cobaciaEdit.length > 0 && (parseInt(cobaciaEdit.slice(-1)) % 2 !== 0 || cobaciaEdit.slice(-1) == 0)) {
             cobaciaEdit = cobaciaEdit.slice(0, -1);
         };
+
+        console.log("cobaciaEdit: ",cobaciaEdit)
         
         var ottobaciasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
             layers: 'hidrogis:ottobacias_AI_IG6_ISR',
             fitLayer: false,
             className: 'camada_ottobacias_montante',
-            CQL_FILTER: "cobacia LIKE '"+cobaciaEdit+"%' AND cobacia >= '"+cobaciaValue+"'"
+            CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'"
         });
         ottobaciasMontante.addTo(map);
     });
