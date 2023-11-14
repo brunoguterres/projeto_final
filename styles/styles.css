@@ -52,7 +52,7 @@ nav a {
 }
 
 nav a:hover {
-    color: rgb(0, 0, 255);
+    color: rgb(0, 112, 150);
     font-weight: bold;
 }
 
@@ -82,22 +82,28 @@ nav a:active {
     stroke-width: 1;
 }
 
-#legend {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background-color: white;
+.legend {
     padding: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    max-width: 200px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
-.legend-title {
-    font-weight: bold;
-    margin-bottom: 8px;
+.legend-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    display: inline-block;
+    border: 1px solid #000; /* Adicione essa linha para bordas nos ícones */
 }
 
-.legend-item {
-    margin-bottom: 5px;
+.camada_ottobacias.legend-icon {
+    background-color: rgb(0, 150, 255);
+}
+
+.camada_ottotrechos.legend-icon {
+    background-color: rgb(0, 0, 255);
+}
+
+.camada_ottobacias_montante.legend-icon {
+    background-color: rgb(255, 150, 0);
 }

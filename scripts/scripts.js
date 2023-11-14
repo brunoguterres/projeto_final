@@ -18,7 +18,6 @@ function onEachFeature(feature, layer) {
 }
 
 
-
 var baseOpenStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     opacity: 0.5,
@@ -69,9 +68,22 @@ var overlayMaps = {
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps);
-
 layerControl.addTo(map);
 
-L.control.scale({
+var barraEscala = L.control.scale({
     position: 'bottomright'  // Posição no canto inferior direito
-}).addTo(map);
+});
+barraEscala.addTo(map);
+
+
+var legend = L.control({ position: 'bottomleft' });
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'legend');
+    div.innerHTML += '<h4>Legenda</h4>';
+    div.innerHTML += '<i class="legend-icon camada_ottobacias"></i> Ottobacias<br>';
+    div.innerHTML += '<i class="legend-icon camada_ottotrechos"></i> Ottotrechos<br>';
+    return div;
+};
+
+legend.addTo(map);
