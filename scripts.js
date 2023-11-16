@@ -85,7 +85,6 @@ var barraEscala = L.control.scale({
 });
 barraEscala.addTo(map);
 
-
 var legend = L.control({ position: 'bottomleft' });
 
 legend.onAdd = function (map) {

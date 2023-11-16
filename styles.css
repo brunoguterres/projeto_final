@@ -1,5 +1,6 @@
 #map {
     margin: 0;
+    padding: 0;
     height: 75vh;
 }
 
@@ -10,7 +11,7 @@ body {
 
 header {
     margin: 0;
-    height: 20vh;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +26,7 @@ header {
 nav {
     margin: 0;
     padding: 0;
-    height: 5vh;
+    height: 40px;
     background-color: rgb(120, 180, 210);
     display: flex;
     justify-content: center;
@@ -93,7 +94,7 @@ nav a.menu_selecionado {
     height: 20px;
     margin-right: 5px;
     display: inline-block;
-    border: 1px solid #000; /* Adicione essa linha para bordas nos ícones */
+    border: 1px solid #000;
 }
 
 .camada_ottobacias.legend-icon {
