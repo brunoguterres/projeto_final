@@ -23,8 +23,10 @@ header {
 }
 
 nav {
+    margin: 0;
+    padding: 0;
     height: 5vh;
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(120, 180, 210);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,24 +42,23 @@ nav ul {
 
 nav li {
     display: inline-block;
-    margin-right: 20px;
+    padding: 0 30px;
 }
 
 nav a {
     text-decoration: none;
-    color: rgb(150, 150, 150);
+    color: rgb(255, 255, 255);
     font-family: sans-serif;
-    transition: 0.3;
+    font-size: 18px;
 }
 
 nav a:hover {
-    color: rgb(100, 100, 100);
-    font-weight: 550;
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
 }
 
 nav a.menu_selecionado {
-    color: rgb(0, 112, 150);
-    font-weight: 550;
+    color: rgb(40, 78, 120);
 }
 
 .camada_ottobacias {
