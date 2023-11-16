@@ -24,7 +24,7 @@ header {
 
 nav {
     height: 5vh;
-    background-color: #f2f2f2;
+    background-color: rgb(240, 240, 240);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,19 +46,18 @@ nav li {
 nav a {
     text-decoration: none;
     color: rgb(150, 150, 150);
-    /*font-weight: bold;*/
     font-family: sans-serif;
     transition: 0.3;
 }
 
 nav a:hover {
-    color: rgb(0, 112, 150);
-    font-weight: bold;
+    color: rgb(100, 100, 100);
+    font-weight: 550;
 }
 
-nav a:active {
-    color: rgb(0, 0, 0); /* Cor para a opção selecionada */
-    font-weight: bold;
+nav a.menu_selecionado {
+    color: rgb(0, 112, 150);
+    font-weight: 550;
 }
 
 .camada_ottobacias {
