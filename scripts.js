@@ -1,13 +1,28 @@
-function onEachFeature(feature, layer) {
+var ottobaciasMontante;
+var outorgasMontante;
+
+var statusOttobacias = false
+var statusOutorgas = false
+
+function selecaoMontante(feature, layer) {
     layer.on('click', function (e) {
+
         var cobaciaValue = feature.properties.cobacia_n;
         var cobaciaEdit = cobaciaValue;
+
+        if(statusOttobacias == true) {
+            map.removeLayer(ottobaciasMontante);
+        };
+
+        if(statusOutorgas == true) {
+            map.removeLayer(outorgasMontante);
+        };
 
         while (cobaciaEdit.length > 0 && (parseInt(cobaciaEdit.slice(-1)) % 2 !== 0 || cobaciaEdit.slice(-1) == 0)) {
             cobaciaEdit = cobaciaEdit.slice(0, -1);
         };
         
-        var ottobaciasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
+        ottobaciasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
             layers: 'hidrogis:ottobacias_AI_IG6_ISR',
             style: {
                 color: "rgba(200, 100, 0)",
@@ -19,38 +34,29 @@ function onEachFeature(feature, layer) {
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
         ottobaciasMontante.addTo(map);
+        statusOttobacias = true
 
-        var outorgasMontante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
+        outorgasMontante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
             layers: 'hidrogis:outorgas_AI_IG6_CNARH',
             attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
-
-        outorgasMontante.on('click', function (event) {
-            var properties = event.layer.feature.properties; // Obtém as propriedades do item clicado
-            var popupContent = '<strong>Cobacia:</strong> ' + properties.cobacia_n + '<br>' +
-                               '<strong>Outras Propriedades:</strong> ' + properties.outras_propriedades;
-        
-            L.popup()
-                .setLatLng(event.latlng)
-                .setContent(popupContent)
-                .openOn(map);
-        });
-
         outorgasMontante.addTo(map);
+        statusOutorgas = true
+
+        console.log('statusOttobacias: ', statusOttobacias)
+        console.log('statusOutorgas: ', statusOutorgas)
     });
 }
 
 
 var baseOpenStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    minZoom: 10,
     maxZoom: 22,
     opacity: 0.5,
     attribution: '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
 var baseGoogleSatelite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-    minZoom: 10,
     maxZoom: 22,
     opacity: 0.7,
     attribution: '<a href="https://www.google.com/maps">Google Satélite</a>'
@@ -58,7 +64,6 @@ var baseGoogleSatelite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={
 
 var baseGoogleStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-    minZoom: 10,
     maxZoom: 22,
     opacity: 0.5,
     attribution: '<a href="https://www.google.com/maps">Google Streets</a>'
@@ -81,7 +86,7 @@ var ottobacias = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
         weight: "1",
     },
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
-    onEachFeature: onEachFeature,
+    onEachFeature: selecaoMontante,
 });
 
 var map = L.map('map', {
