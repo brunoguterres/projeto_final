@@ -43,9 +43,6 @@ function selecaoMontante(feature, layer) {
         });
         outorgasMontante.addTo(map);
         statusOutorgas = true
-
-        console.log('statusOttobacias: ', statusOttobacias)
-        console.log('statusOutorgas: ', statusOutorgas)
     });
 }
 
@@ -110,21 +107,9 @@ var layerControl = L.control.layers(baseMaps, overlayMaps);
 layerControl.addTo(map);
 
 var barraEscala = L.control.scale({
-    position: 'bottomright'  // Posição no canto inferior direito
+    position: 'bottomright'
 });
 barraEscala.addTo(map);
-
-var legend = L.control({ position: 'bottomleft' });
-
-legend.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'legend');
-    div.innerHTML += '<h4>Legenda</h4>';
-    div.innerHTML += '<i class="legend-icon camada_ottobacias"></i> Ottobacias<br>';
-    div.innerHTML += '<i class="legend-icon camada_ottotrechos"></i> Ottotrechos<br>';
-    return div;
-};
-
-legend.addTo(map);
 
 var botaoLimparMapa = document.getElementById('limparMapa');
 
