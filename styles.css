@@ -62,27 +62,6 @@ nav a.menu_selecionado {
     color: rgb(40, 78, 120);
 }
 
-.camada_ottobacias {
-    fill: rgb(0, 150, 255);
-    fill-opacity: 0.05;
-    stroke: rgb(255, 255, 255);
-    stroke-width: 0.5;
-    stroke-opacity: 1;
-}
-
-.camada_ottotrechos {
-    stroke: rgb(0, 0, 255);
-    stroke-width: 1.5;
-    stroke-opacity: 0.5;
-}
-
-.camada_ottobacias_montante {
-    fill: rgb(255, 150, 0);
-    fill-opacity: 0.3;
-    stroke: rgb(200, 100, 0);
-    stroke-width: 1;
-}
-
 .legend {
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);

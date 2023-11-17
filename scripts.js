@@ -9,32 +9,48 @@ function onEachFeature(feature, layer) {
         
         var ottobaciasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
             layers: 'hidrogis:ottobacias_AI_IG6_ISR',
+            style: {
+                color: "rgba(200, 100, 0)",
+                fillColor: "rgba(255, 150, 0)",
+                weight: "1",
+            },
             fitLayer: true,
-            className: 'camada_ottobacias_montante',
             attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
-            CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'"
+            CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
         ottobaciasMontante.addTo(map);
 
-        var outorgasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
+        var outorgasMontante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
             layers: 'hidrogis:outorgas_AI_IG6_CNARH',
-            fitLayer: false,
-            //className: 'camada_ottobacias_montante',
             attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
-            CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'"
+            CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
+
+        outorgasMontante.on('click', function (event) {
+            var properties = event.layer.feature.properties; // Obtém as propriedades do item clicado
+            var popupContent = '<strong>Cobacia:</strong> ' + properties.cobacia_n + '<br>' +
+                               '<strong>Outras Propriedades:</strong> ' + properties.outras_propriedades;
+        
+            L.popup()
+                .setLatLng(event.latlng)
+                .setContent(popupContent)
+                .openOn(map);
+        });
+
         outorgasMontante.addTo(map);
     });
 }
 
 
 var baseOpenStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+    minZoom: 10,
+    maxZoom: 22,
     opacity: 0.5,
     attribution: '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
 var baseGoogleSatelite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    minZoom: 10,
     maxZoom: 22,
     opacity: 0.7,
     attribution: '<a href="https://www.google.com/maps">Google Satélite</a>'
@@ -42,22 +58,30 @@ var baseGoogleSatelite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={
 
 var baseGoogleStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-    maxZoom: 20,
+    minZoom: 10,
+    maxZoom: 22,
     opacity: 0.5,
     attribution: '<a href="https://www.google.com/maps">Google Streets</a>'
 });
 
 var ottotrechos = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
     layers: 'hidrogis:ottotrechos_AI_IG6',
-    className: 'camada_ottotrechos',
-    attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>'
+    style: {
+        color: "rgba(120, 120, 255, 1)",
+        weight: "1.5",
+    },
+    attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
 });
 
 var ottobacias = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
     layers: 'hidrogis:ottobacias_AI_IG6_ISR',
-    className: 'camada_ottobacias',
+    style: {
+        color: "rgba(255, 255, 255, 1)",
+        fillColor: "rgba(0, 150, 255, 0.5)",
+        weight: "1",
+    },
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
-    onEachFeature: onEachFeature
+    onEachFeature: onEachFeature,
 });
 
 var map = L.map('map', {
