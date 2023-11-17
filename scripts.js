@@ -125,3 +125,20 @@ legend.onAdd = function (map) {
 };
 
 legend.addTo(map);
+
+var botaoLimparMapa = document.getElementById('limparMapa');
+
+botaoLimparMapa.addEventListener('click', function() {
+    if(statusOttobacias == true) {
+        map.removeLayer(ottobaciasMontante);
+    };
+    statusOttobacias = false;
+
+    if(statusOutorgas == true) {
+        map.removeLayer(outorgasMontante);
+    };
+    statusOutorgas = false;
+
+    console.log('statusOttobacias: ', statusOttobacias)
+    console.log('statusOutorgas: ', statusOutorgas)
+});
