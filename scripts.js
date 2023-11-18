@@ -68,8 +68,9 @@ var baseGoogleStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y
 
 var ottotrechos = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
     layers: 'hidrogis:ottotrechos_AI_IG6',
+    fitLayer: false,
     style: {
-        color: "rgba(120, 120, 255, 1)",
+        color: "rgba(10, 25, 180, 1)",
         weight: "1.5",
     },
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
@@ -77,17 +78,18 @@ var ottotrechos = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
 
 var ottobacias = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
     layers: 'hidrogis:ottobacias_AI_IG6_ISR',
+    fitLayer: true,
     style: {
-        color: "rgba(255, 255, 255, 1)",
-        fillColor: "rgba(0, 150, 255, 0.5)",
-        weight: "1",
+        color: "rgba(35, 150, 160, 1)",
+        fillColor: "rgba(90, 199, 204, 1)",
+        weight: "0.8",
     },
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
     onEachFeature: selecaoMontante,
 });
 
 var map = L.map('map', {
-    center: [-15, -51.5],
+    center: [-16, -51.5],
     zoom: 4,
     layers: [baseOpenStreetMap, ottotrechos, ottobacias]
 });
@@ -126,4 +128,27 @@ botaoLimparMapa.addEventListener('click', function() {
 
     console.log('statusOttobacias: ', statusOttobacias)
     console.log('statusOutorgas: ', statusOutorgas)
+});
+
+var geocoder = L.Control.Geocoder.nominatim();
+
+var searchControl = L.Control.geocoder({
+    geocoder: geocoder
+}).addTo(map);
+
+searchControl.setPosition('topleft');
+
+searchControl.on('markgeocode', function (e) {
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+        }
+    });
+
+    var marker = L.marker(e.geocode.center, {
+        title: e.geocode.name,
+        draggable: true
+    }).addTo(map);
+
+    marker.bindPopup('Local: ' + e.geocode.name);
 });

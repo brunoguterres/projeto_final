@@ -14,7 +14,7 @@ header {
 
 #limparMapa.limparBotao {
     position: absolute;
-    top: 90px;
+    top: 130px;
     left: 10px;
     z-index: 1000;
     margin: 0;
@@ -31,7 +31,8 @@ header {
 }
 
 #limparMapa.limparBotao:hover {
-    background-color: #45a049; /* Cor de fundo quando o botão é hover */
+    color: rgb(255, 255, 255);
+    background-color: rgba(255, 50, 50, 0.8); /* Cor de fundo quando o botão é hover */
 }
 
 #map {
