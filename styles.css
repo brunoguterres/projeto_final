@@ -133,14 +133,14 @@ nav a.menu_selecionado {
     font-family: sans-serif;
 }
 
-.item-ottotrechos {
+.item-simples {
     display: flex;
     align-items: center;
     margin: 0;
     padding: 0;
 }
 
-.item-ottotrechos img {
+.item-simples img {
     width: 20px;
     height: 20px;
     padding-right: 5px;
@@ -148,70 +148,7 @@ nav a.menu_selecionado {
     padding-bottom: 2.5px;
 }
 
-.item-ottotrechos span {
-    color: rgb(0, 0, 0);
-    font-size: 12px;
-    font-family: sans-serif;
-}
-
-.item-ottotrechos-jusante {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
-.item-ottotrechos-jusante img {
-    width: 20px;
-    height: 20px;
-    padding-right: 5px;
-    padding-top: 2.5px;
-    padding-bottom: 2.5px;
-}
-
-.item-ottotrechos-jusante span {
-    color: rgb(0, 0, 0);
-    font-size: 12px;
-    font-family: sans-serif;
-}
-
-.item-ottobacias {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
-.item-ottobacias img {
-    width: 20px;
-    height: 20px;
-    padding-right: 5px;
-    padding-top: 2.5px;
-    padding-bottom: 2.5px;
-}
-
-.item-ottobacias span {
-    color: rgb(0, 0, 0);
-    font-size: 12px;
-    font-family: sans-serif;
-}
-
-.item-bacia {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
-.item-bacia img {
-    width: 20px;
-    height: 20px;
-    padding-right: 5px;
-    padding-top: 2.5px;
-    padding-bottom: 2.5px;
-}
-
-.item-bacia span {
+.item-simples span {
     color: rgb(0, 0, 0);
     font-size: 12px;
     font-family: sans-serif;

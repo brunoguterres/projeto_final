@@ -205,7 +205,7 @@ function updateLegenda() {
         if (!itemOttotrechos) {
             itemOttotrechos = document.createElement('div');
             itemOttotrechos.id = 'item-ottotrechos';
-            itemOttotrechos.className = 'item-ottotrechos';
+            itemOttotrechos.className = 'item-simples';
             itemOttotrechos.innerHTML = '<img src="icones_legenda/icone_ottotrechos.png" alt="icone_ottotrechos">' + '<span>Ottotrechos</span>';
             caixaLegenda.appendChild(itemOttotrechos);
         }
@@ -219,7 +219,7 @@ function updateLegenda() {
         if (!itemOttotrechosJusante) {
             itemOttotrechosJusante = document.createElement('div');
             itemOttotrechosJusante.id = 'item-ottotrechos-jusante';
-            itemOttotrechosJusante.className = 'item-ottotrechos-jusante';
+            itemOttotrechosJusante.className = 'item-simples';
             itemOttotrechosJusante.innerHTML = '<img src="icones_legenda/icone_ottotrechos_jusante.png" alt="icone_ottotrechos_jusante">' + '<span>Ottotrechos à jusante</span>';
             caixaLegenda.appendChild(itemOttotrechosJusante);
         }
@@ -233,7 +233,7 @@ function updateLegenda() {
         if (!itemOttobacias) {
             itemOttobacias = document.createElement('div');
             itemOttobacias.id = 'item-ottobacias';
-            itemOttobacias.className = 'item-ottobacias';
+            itemOttobacias.className = 'item-simples';
             itemOttobacias.innerHTML = '<img src="icones_legenda/icone_ottobacias.png" alt="icone_ottobacias">' + '<span>Ottobacias</span>';
             caixaLegenda.appendChild(itemOttobacias);
         }
@@ -247,7 +247,7 @@ function updateLegenda() {
         if (!itemBacia) {
             itemBacia = document.createElement('div');
             itemBacia.id = 'item-bacia';
-            itemBacia.className = 'item-bacia';
+            itemBacia.className = 'item-simples';
             itemBacia.innerHTML = '<img src="icones_legenda/icone_bacia.png" alt="icone_bacia">' + '<span>Limite da bacia</span>';
             caixaLegenda.appendChild(itemBacia);
         }
