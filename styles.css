@@ -92,6 +92,51 @@ nav a.menu_selecionado {
     color: rgb(40, 78, 120);
 }
 
+#caixa-legenda {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1000;
+    max-height: 200px; /* Altura máxima da caixa (ajuste conforme necessário) */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical quando necessário */
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border: 2px solid rgba(170, 170, 170, 0.8);
+    border-radius: 3px;
+}
+
+#titulo-legenda {
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: 550;
+    color: rgb(0, 0, 0);
+    margin-bottom: 10px;
+}
+
+.item1 {
+    /* Estilos específicos para o primeiro item */
+    background-color: #e0e0e0; /* Exemplo de cor de fundo */
+    padding: 10px; /* Exemplo de preenchimento */
+}
+
+.item2 {
+    /* Estilos específicos para o segundo item */
+    background-color: #c0c0c0; /* Exemplo de cor de fundo */
+    padding: 15px; /* Exemplo de preenchimento */
+}
+
+.custom-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.custom-item img {
+    width: 40px; /* Largura da imagem (ajuste conforme necessário) */
+    height: 40px; /* Altura da imagem (ajuste conforme necessário) */
+    margin-right: 10px;
+}
+
 footer {
     margin: 0;
     padding: 0;
