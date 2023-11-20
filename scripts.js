@@ -1,5 +1,6 @@
 var ottobaciasMontante;
 var outorgasMontante;
+var marker;
 
 var statusOttobacias = false
 var statusOutorgas = false
@@ -126,6 +127,11 @@ botaoLimparMapa.addEventListener('click', function() {
     };
     statusOutorgas = false;
 
+    if (marker) {
+        map.removeLayer(marker);
+        marcador = null;
+    }
+
     console.log('statusOttobacias: ', statusOttobacias)
     console.log('statusOutorgas: ', statusOutorgas)
 });
@@ -145,10 +151,11 @@ searchControl.on('markgeocode', function (e) {
         }
     });
 
-    var marker = L.marker(e.geocode.center, {
+    marker = L.marker(e.geocode.center, {
         title: e.geocode.name,
         draggable: true
     }).addTo(map);
 
     marker.bindPopup('Local: ' + e.geocode.name);
 });
+
