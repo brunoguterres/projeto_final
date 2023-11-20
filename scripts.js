@@ -1,9 +1,11 @@
 var ottobaciasMontante;
 var outorgasMontante;
+var ottotrechosPrincipal;
 var marker;
 
-var statusOttobacias = false
-var statusOutorgas = false
+var statusOttobacias = false;
+var statusOutorgas = false;
+var statusOttotrechos = false;
 
 function selecaoMontante(feature, layer) {
     layer.on('click', function (e) {
@@ -23,19 +25,13 @@ function selecaoMontante(feature, layer) {
             cobaciaEdit = cobaciaEdit.slice(0, -1);
         };
         
-        ottobaciasMontante = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
+        ottobaciasMontante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
             layers: 'hidrogis:ottobacias_AI_IG6_ISR',
-            style: {
-                color: "rgba(200, 100, 0)",
-                fillColor: "rgba(255, 150, 0)",
-                weight: "1",
-            },
-            fitLayer: true,
             attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
         ottobaciasMontante.addTo(map);
-        statusOttobacias = true
+        statusOttobacias = true;
 
         outorgasMontante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
             layers: 'hidrogis:outorgas_AI_IG6_CNARH',
@@ -43,10 +39,17 @@ function selecaoMontante(feature, layer) {
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
         outorgasMontante.addTo(map);
-        statusOutorgas = true
+        statusOutorgas = true;
+
+        ottotrechosPrincipal = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
+            layers: 'hidrogis:ottotrechos_jusante_AI_IG6',
+            attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
+            CQL_FILTER: "cocursodag = '8628'",
+        });
+        ottotrechosPrincipal.addTo(map);
+        statusOttotrechos = true;
     });
 }
-
 
 var baseOpenStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 22,
@@ -67,18 +70,14 @@ var baseGoogleStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y
     attribution: '<a href="https://www.google.com/maps">Google Streets</a>'
 });
 
-var ottotrechos = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
+var ottotrechos = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
     layers: 'hidrogis:ottotrechos_AI_IG6',
-    fitLayer: false,
-    style: {
-        color: "rgba(10, 25, 180, 1)",
-        weight: "1.5",
-    },
+    style: "estilo_ottotrechos_AI_IG6",
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
 });
 
 var ottobacias = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
-    layers: 'hidrogis:ottobacias_AI_IG6_ISR',
+    layers: 'hidrogis:ottobacias_AI_IG6',
     fitLayer: true,
     style: {
         color: "rgba(35, 150, 160, 1)",
@@ -109,6 +108,12 @@ var overlayMaps = {
 var layerControl = L.control.layers(baseMaps, overlayMaps);
 layerControl.addTo(map);
 
+var limiteBacia = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
+    layers: 'hidrogis:bacia_AI_IG6',
+    attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
+});
+limiteBacia.addTo(map);
+
 var barraEscala = L.control.scale({
     position: 'bottomright'
 });
@@ -119,21 +124,24 @@ var botaoLimparMapa = document.getElementById('limparMapa');
 botaoLimparMapa.addEventListener('click', function() {
     if(statusOttobacias == true) {
         map.removeLayer(ottobaciasMontante);
+        statusOttobacias = false;
     };
-    statusOttobacias = false;
 
     if(statusOutorgas == true) {
         map.removeLayer(outorgasMontante);
+        statusOutorgas = false;
     };
-    statusOutorgas = false;
+
+    if(statusOttotrechos == true) {
+        map.removeLayer(ottotrechosPrincipal);
+        statusOttotrechos = false;
+    };
 
     if (marker) {
         map.removeLayer(marker);
         marcador = null;
     }
 
-    console.log('statusOttobacias: ', statusOttobacias)
-    console.log('statusOutorgas: ', statusOutorgas)
 });
 
 var geocoder = L.Control.Geocoder.nominatim();
