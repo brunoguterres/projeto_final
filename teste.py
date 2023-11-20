@@ -26,7 +26,7 @@ print('rios:', rios)
 selecao = ''
 for elementos in rios:
     if elementos != '':
-        selecao = selecao + 'camada_ottotrechos.cocursodag = \''+ elementos +'\' OR '
+        selecao = selecao + 'cocursodag = \''+ elementos +'\' OR '
     else:
         break
 comp = len(selecao)
@@ -34,10 +34,8 @@ comp2 = comp - 3
 print('selecao:', selecao)
 sele2 = selecao [:comp2]
 print('sele2:', sele2)
-query_ottotrechos_jusante = '?query=SELECT camada_ottotrechos.cocursodag, camada_ottotrechos.geometry '\
-                            'FROM camada_ottotrechos '\
-                            'WHERE ('+ sele2 +')AND camada_ottotrechos.cobacia < \''+cod_otto_interesse+'\''
-print('query_ottotrechos_jusante:', query_ottotrechos_jusante)
+consulta = '('+ sele2 +') AND cobacia_n < \''+cod_otto_interesse+'\''
+print('consulta:', consulta)
 
 
 print('\n''-> Seleção de ottorechos a jusante realizado.')
