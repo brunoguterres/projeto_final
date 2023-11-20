@@ -113,6 +113,28 @@ nav a.menu_selecionado {
     margin-bottom: 10px;
 }
 
+.item-outorgas {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.item-outorgas img {
+    width: 15px;
+    height: 15px;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+}
+
+.item-outorgas span {
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-family: sans-serif;
+}
+
 .item-ottotrechos {
     display: flex;
     align-items: center;

@@ -172,10 +172,24 @@ searchControl.on('markgeocode', function (e) {
 
 function updateLegenda() {
     var caixaLegenda = document.getElementById('caixa-legenda');
+    var itemOutorgas = document.getElementById('item-ottotrechos-jusante');
     var itemOttotrechosJusante = document.getElementById('item-ottotrechos-jusante');
 
+    if(statusOutorgas) {
+        if(!itemOutorgas) {
+            itemOutorgas = document.createElement('div');
+            itemOutorgas.id = 'item-outorgas';
+            itemOutorgas.className = 'item-outorgas';
+            itemOutorgas.innerHTML = '<img src="icones_legenda/icone_agropecuaria.png" alt="icone_outorga_agropecuaria">' + '<span>Agropecuária</span>';
+            caixaLegenda.appendChild(itemOutorgas);
+        }
+    } else {
+        if (itemOutorgas) {
+            caixaLegenda.removeChild(itemOutorgas);
+        }
+    }
+
     if (statusOttotrechos) {
-        // Adiciona o item-ottotrechos-jusante se não estiver presente
         if (!itemOttotrechosJusante) {
             itemOttotrechosJusante = document.createElement('div');
             itemOttotrechosJusante.id = 'item-ottotrechos-jusante';
@@ -184,7 +198,6 @@ function updateLegenda() {
             caixaLegenda.appendChild(itemOttotrechosJusante);
         }
     } else {
-        // Remove o item-ottotrechos-jusante se estiver presente
         if (itemOttotrechosJusante) {
             caixaLegenda.removeChild(itemOttotrechosJusante);
         }
