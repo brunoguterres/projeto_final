@@ -1,11 +1,15 @@
 var ottobaciasMontante;
 var outorgasMontante;
-var ottotrechosPrincipal;
+var ottotrechosJusante;
 var marker;
 
-var statusOttobacias = false;
-var statusOutorgas = false;
+var status = false;
 var statusOttotrechos = false;
+var statusOttotrechosJusante = false;
+var statusOttobacias = false;
+var statusBacia = false;
+var statusOttobaciasMontante = false;
+var statusOutorgas = false;
 
 function selecaoMontante(feature, layer) {
     layer.on('click', function (e) {
@@ -13,7 +17,7 @@ function selecaoMontante(feature, layer) {
         var cobaciaValue = feature.properties.cobacia_n;
         var cobaciaEdit = cobaciaValue;
 
-        if(statusOttobacias == true) {
+        if(statusOttobaciasMontante == true) {
             map.removeLayer(ottobaciasMontante);
         };
 
@@ -31,7 +35,7 @@ function selecaoMontante(feature, layer) {
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
         ottobaciasMontante.addTo(map);
-        statusOttobacias = true;
+        statusOttobaciasMontante = true;
 
         outorgasMontante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
             layers: 'hidrogis:outorgas_AI_IG6_CNARH',
@@ -41,14 +45,13 @@ function selecaoMontante(feature, layer) {
         outorgasMontante.addTo(map);
         statusOutorgas = true;
 
-        ottotrechosPrincipal = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
+        ottotrechosJusante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
             layers: 'hidrogis:ottotrechos_jusante_AI_IG6',
             attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
             CQL_FILTER: "cocursodag = '8628'",
         });
-        ottotrechosPrincipal.addTo(map);
-        statusOttotrechos = true;
-
+        ottotrechosJusante.addTo(map);
+        statusOttotrechosJusante = true;
         updateLegenda();
     });
 }
@@ -110,11 +113,16 @@ var overlayMaps = {
 var layerControl = L.control.layers(baseMaps, overlayMaps);
 layerControl.addTo(map);
 
+statusOttotrechos = true;
+statusOttobacias = true;
+
 var limiteBacia = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
     layers: 'hidrogis:bacia_AI_IG6',
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
 });
 limiteBacia.addTo(map);
+
+statusBacia = true
 
 var barraEscala = L.control.scale({
     position: 'bottomright'
@@ -124,9 +132,9 @@ barraEscala.addTo(map);
 var botaoLimparMapa = document.getElementById('limparMapa');
 
 botaoLimparMapa.addEventListener('click', function() {
-    if(statusOttobacias == true) {
+    if(statusOttobaciasMontante == true) {
         map.removeLayer(ottobaciasMontante);
-        statusOttobacias = false;
+        statusOttobaciasMontante = false;
     };
 
     if(statusOutorgas == true) {
@@ -134,16 +142,15 @@ botaoLimparMapa.addEventListener('click', function() {
         statusOutorgas = false;
     };
 
-    if(statusOttotrechos == true) {
-        map.removeLayer(ottotrechosPrincipal);
-        statusOttotrechos = false;
+    if(statusOttotrechosJusante == true) {
+        map.removeLayer(ottotrechosJusante);
+        statusOttotrechosJusante = false;
     };
 
     if (marker) {
         map.removeLayer(marker);
         marcador = null;
     }
-
     updateLegenda();
 });
 
@@ -170,11 +177,16 @@ searchControl.on('markgeocode', function (e) {
     marker.bindPopup('Local: ' + e.geocode.name);
 });
 
+
 function updateLegenda() {
     var caixaLegenda = document.getElementById('caixa-legenda');
     var itemOutorgas = document.getElementById('item-ottotrechos-jusante');
+    var itemOttotrechos = document.getElementById('item-ottotrechos');
     var itemOttotrechosJusante = document.getElementById('item-ottotrechos-jusante');
+    var itemOttobacias = document.getElementById('item-ottobacias');
+    var itemBacia = document.getElementById('item-bacia');
 
+    
     if(statusOutorgas) {
         if(!itemOutorgas) {
             itemOutorgas = document.createElement('div');
@@ -190,6 +202,20 @@ function updateLegenda() {
     }
 
     if (statusOttotrechos) {
+        if (!itemOttotrechos) {
+            itemOttotrechos = document.createElement('div');
+            itemOttotrechos.id = 'item-ottotrechos';
+            itemOttotrechos.className = 'item-ottotrechos';
+            itemOttotrechos.innerHTML = '<img src="icones_legenda/icone_ottotrechos.png" alt="icone_ottotrechos">' + '<span>Ottotrechos</span>';
+            caixaLegenda.appendChild(itemOttotrechos);
+        }
+    } else {
+        if (itemOttotrechos) {
+            caixaLegenda.removeChild(itemOttotrechos);
+        }
+    }
+    
+    if (statusOttotrechosJusante) {
         if (!itemOttotrechosJusante) {
             itemOttotrechosJusante = document.createElement('div');
             itemOttotrechosJusante.id = 'item-ottotrechos-jusante';
@@ -202,6 +228,35 @@ function updateLegenda() {
             caixaLegenda.removeChild(itemOttotrechosJusante);
         }
     }
+    
+    if (statusOttobacias) {
+        if (!itemOttobacias) {
+            itemOttobacias = document.createElement('div');
+            itemOttobacias.id = 'item-ottobacias';
+            itemOttobacias.className = 'item-ottobacias';
+            itemOttobacias.innerHTML = '<img src="icones_legenda/icone_ottobacias.png" alt="icone_ottobacias">' + '<span>Ottobacias</span>';
+            caixaLegenda.appendChild(itemOttobacias);
+        }
+    } else {
+        if (itemOttobacias) {
+            caixaLegenda.removeChild(itemOttobacias);
+        }
+    }
+
+    if (statusBacia) {
+        if (!itemBacia) {
+            itemBacia = document.createElement('div');
+            itemBacia.id = 'item-bacia';
+            itemBacia.className = 'item-bacia';
+            itemBacia.innerHTML = '<img src="icones_legenda/icone_bacia.png" alt="icone_bacia">' + '<span>Limite da bacia</span>';
+            caixaLegenda.appendChild(itemBacia);
+        }
+    } else {
+        if (itemBacia) {
+            caixaLegenda.removeChild(itemBacia);
+        }
+    }
+
 }
 
 updateLegenda();
