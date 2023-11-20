@@ -48,6 +48,8 @@ function selecaoMontante(feature, layer) {
         });
         ottotrechosPrincipal.addTo(map);
         statusOttotrechos = true;
+
+        updateLegenda();
     });
 }
 
@@ -141,6 +143,8 @@ botaoLimparMapa.addEventListener('click', function() {
         map.removeLayer(marker);
         marcador = null;
     }
+
+    updateLegenda();
 });
 
 var geocoder = L.Control.Geocoder.nominatim();
@@ -166,3 +170,25 @@ searchControl.on('markgeocode', function (e) {
     marker.bindPopup('Local: ' + e.geocode.name);
 });
 
+function updateLegenda() {
+    var caixaLegenda = document.getElementById('caixa-legenda');
+    var itemOttotrechosJusante = document.getElementById('item-ottotrechos-jusante');
+
+    if (statusOttotrechos) {
+        // Adiciona o item-ottotrechos-jusante se não estiver presente
+        if (!itemOttotrechosJusante) {
+            itemOttotrechosJusante = document.createElement('div');
+            itemOttotrechosJusante.id = 'item-ottotrechos-jusante';
+            itemOttotrechosJusante.className = 'item-ottotrechos-jusante';
+            itemOttotrechosJusante.innerHTML = '<img src="icones_legenda/icone_ottotrechos_jusante.png" alt="icone_ottotrechos_jusante">' + '<span>Ottotrechos à jusante</span>';
+            caixaLegenda.appendChild(itemOttotrechosJusante);
+        }
+    } else {
+        // Remove o item-ottotrechos-jusante se estiver presente
+        if (itemOttotrechosJusante) {
+            caixaLegenda.removeChild(itemOttotrechosJusante);
+        }
+    }
+}
+
+updateLegenda();

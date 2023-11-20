@@ -134,6 +134,27 @@ nav a.menu_selecionado {
     font-family: sans-serif;
 }
 
+.item-ottotrechos-jusante {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.item-ottotrechos-jusante img {
+    width: 20px;
+    height: 20px;
+    padding-right: 5px;
+    padding-top: 2.5px;
+    padding-bottom: 2.5px;
+}
+
+.item-ottotrechos-jusante span {
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-family: sans-serif;
+}
+
 .item-ottobacias {
     display: flex;
     align-items: center;
