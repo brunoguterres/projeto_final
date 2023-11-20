@@ -141,7 +141,6 @@ botaoLimparMapa.addEventListener('click', function() {
         map.removeLayer(marker);
         marcador = null;
     }
-
 });
 
 var geocoder = L.Control.Geocoder.nominatim();
