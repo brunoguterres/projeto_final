@@ -1,9 +1,7 @@
 var ottobaciasMontante;
 var outorgasMontante;
-var ottotrechosJusante;
 var marker;
 
-var statusOttotrechosJusante = false;
 var statusOttobaciasMontante = false;
 var statusOutorgas = false;
 
@@ -41,13 +39,6 @@ function selecaoMontante(feature, layer) {
         outorgasMontante.addTo(map);
         statusOutorgas = true;
 
-        ottotrechosJusante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
-            layers: 'hidrogis:ottotrechos_jusante_AI_IG6',
-            attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
-            CQL_FILTER: "cocursodag = '8628'",
-        });
-        ottotrechosJusante.addTo(map);
-        statusOttotrechosJusante = true;
     });
 }
 
@@ -135,11 +126,6 @@ botaoLimparMapa.addEventListener('click', function() {
     if(statusOutorgas == true) {
         map.removeLayer(outorgasMontante);
         statusOutorgas = false;
-    };
-
-    if(statusOttotrechosJusante == true) {
-        map.removeLayer(ottotrechosJusante);
-        statusOttotrechosJusante = false;
     };
 
     if (marker) {
