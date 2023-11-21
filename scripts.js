@@ -63,7 +63,6 @@ var baseGoogleStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y
 
 var ottotrechos = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
     layers: 'hidrogis:ottotrechos_AI_IG6',
-    style: "estilo_ottotrechos_AI_IG6",
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
 });
 
@@ -93,7 +92,7 @@ var baseMaps = {
 
 var overlayMaps = {
     "Ottobacias": ottobacias,
-    "Ottotrechos": ottotrechos
+    "Ottotrechos": ottotrechos,
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps);
