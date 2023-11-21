@@ -12,6 +12,42 @@ header {
     background-color: rgb(0, 112, 150);
 }
 
+#conteudo_inicio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+}
+
+.texto {
+    width: 60%;
+    padding-right: 25px;
+    box-sizing: border-box;
+}
+
+.texto h1 {
+    font-size: 50px;
+    margin-bottom: 30px;
+    font-family: sans-serif;
+    color: rgba(40, 78, 140, 0.8);
+}
+
+.imagem {
+    width: 30%;
+    box-sizing: border-box;
+}
+
+.paragrafo {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    text-align: justify;
+    color: rgb(80, 80, 80);
+    text-indent: 50px;
+}
+
 #limparMapa.limparBotao {
     position: absolute;
     top: 130px;
