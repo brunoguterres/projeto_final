@@ -25,12 +25,6 @@ header {
     padding: 25px 75px;
 }
 
-.texto {
-    width: 60%;
-    padding-right: 25px;
-    box-sizing: border-box;
-}
-
 .texto h1 {
     font-size: 50px;
     margin-bottom: 50px;
@@ -38,9 +32,20 @@ header {
     color: rgba(40, 78, 140, 0.8);
 }
 
-.imagem {
-    width: 30%;
+.texto {
     box-sizing: border-box;
+}
+
+.imagem-recursos-hidricos img{
+    padding: 0 50px;
+    width: 500px;
+    height: auto;
+}
+
+.imagem-area-estudo img{
+    padding: 0 50px;
+    width: 500px;
+    height: auto;
 }
 
 .paragrafo {
