@@ -3,11 +3,7 @@ var outorgasMontante;
 var ottotrechosJusante;
 var marker;
 
-var status = false;
-var statusOttotrechos = false;
 var statusOttotrechosJusante = false;
-var statusOttobacias = false;
-var statusBacia = false;
 var statusOttobaciasMontante = false;
 var statusOutorgas = false;
 
@@ -52,7 +48,6 @@ function selecaoMontante(feature, layer) {
         });
         ottotrechosJusante.addTo(map);
         statusOttotrechosJusante = true;
-        updateLegenda();
     });
 }
 
@@ -151,7 +146,6 @@ botaoLimparMapa.addEventListener('click', function() {
         map.removeLayer(marker);
         marcador = null;
     }
-    updateLegenda();
 });
 
 var geocoder = L.Control.Geocoder.nominatim();
@@ -176,87 +170,3 @@ searchControl.on('markgeocode', function (e) {
 
     marker.bindPopup('Local: ' + e.geocode.name);
 });
-
-
-function updateLegenda() {
-    var caixaLegenda = document.getElementById('caixa-legenda');
-    var itemOutorgas = document.getElementById('item-ottotrechos-jusante');
-    var itemOttotrechos = document.getElementById('item-ottotrechos');
-    var itemOttotrechosJusante = document.getElementById('item-ottotrechos-jusante');
-    var itemOttobacias = document.getElementById('item-ottobacias');
-    var itemBacia = document.getElementById('item-bacia');
-
-    
-    if(statusOutorgas) {
-        if(!itemOutorgas) {
-            itemOutorgas = document.createElement('div');
-            itemOutorgas.id = 'item-outorgas';
-            itemOutorgas.className = 'item-outorgas';
-            itemOutorgas.innerHTML = '<img src="icones_legenda/icone_agropecuaria.png" alt="icone_outorga_agropecuaria">' + '<span>Agropecuária</span>';
-            caixaLegenda.appendChild(itemOutorgas);
-        }
-    } else {
-        if (itemOutorgas) {
-            caixaLegenda.removeChild(itemOutorgas);
-        }
-    }
-
-    if (statusOttotrechos) {
-        if (!itemOttotrechos) {
-            itemOttotrechos = document.createElement('div');
-            itemOttotrechos.id = 'item-ottotrechos';
-            itemOttotrechos.className = 'item-simples';
-            itemOttotrechos.innerHTML = '<img src="icones_legenda/icone_ottotrechos.png" alt="icone_ottotrechos">' + '<span>Ottotrechos</span>';
-            caixaLegenda.appendChild(itemOttotrechos);
-        }
-    } else {
-        if (itemOttotrechos) {
-            caixaLegenda.removeChild(itemOttotrechos);
-        }
-    }
-    
-    if (statusOttotrechosJusante) {
-        if (!itemOttotrechosJusante) {
-            itemOttotrechosJusante = document.createElement('div');
-            itemOttotrechosJusante.id = 'item-ottotrechos-jusante';
-            itemOttotrechosJusante.className = 'item-simples';
-            itemOttotrechosJusante.innerHTML = '<img src="icones_legenda/icone_ottotrechos_jusante.png" alt="icone_ottotrechos_jusante">' + '<span>Ottotrechos à jusante</span>';
-            caixaLegenda.appendChild(itemOttotrechosJusante);
-        }
-    } else {
-        if (itemOttotrechosJusante) {
-            caixaLegenda.removeChild(itemOttotrechosJusante);
-        }
-    }
-    
-    if (statusOttobacias) {
-        if (!itemOttobacias) {
-            itemOttobacias = document.createElement('div');
-            itemOttobacias.id = 'item-ottobacias';
-            itemOttobacias.className = 'item-simples';
-            itemOttobacias.innerHTML = '<img src="icones_legenda/icone_ottobacias.png" alt="icone_ottobacias">' + '<span>Ottobacias</span>';
-            caixaLegenda.appendChild(itemOttobacias);
-        }
-    } else {
-        if (itemOttobacias) {
-            caixaLegenda.removeChild(itemOttobacias);
-        }
-    }
-
-    if (statusBacia) {
-        if (!itemBacia) {
-            itemBacia = document.createElement('div');
-            itemBacia.id = 'item-bacia';
-            itemBacia.className = 'item-simples';
-            itemBacia.innerHTML = '<img src="icones_legenda/icone_bacia.png" alt="icone_bacia">' + '<span>Limite da bacia</span>';
-            caixaLegenda.appendChild(itemBacia);
-        }
-    } else {
-        if (itemBacia) {
-            caixaLegenda.removeChild(itemBacia);
-        }
-    }
-
-}
-
-updateLegenda();
