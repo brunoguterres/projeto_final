@@ -2,6 +2,12 @@
     position: relative;
 }
 
+#map {
+    margin: 0;
+    padding: 0;
+    height: 70vh;
+}
+
 header {
     margin: 0;
     padding: 0;
@@ -16,7 +22,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 75px;
+    padding: 25px 75px;
 }
 
 .texto {
