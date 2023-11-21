@@ -16,7 +16,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
+    padding: 75px;
 }
 
 .texto {
@@ -27,7 +27,7 @@ header {
 
 .texto h1 {
     font-size: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     font-family: sans-serif;
     color: rgba(40, 78, 140, 0.8);
 }
@@ -46,35 +46,6 @@ header {
     text-align: justify;
     color: rgb(80, 80, 80);
     text-indent: 50px;
-}
-
-#limparMapa.limparBotao {
-    position: absolute;
-    top: 130px;
-    left: 10px;
-    z-index: 1000;
-    margin: 0;
-    padding: 7px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    font-size: 16px;
-    border: 2px solid rgba(170, 170, 170, 0.8);
-    border-radius: 3px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#limparMapa.limparBotao:hover {
-    color: rgb(255, 255, 255);
-    background-color: rgba(255, 50, 50, 0.8); /* Cor de fundo quando o botão é hover */
-}
-
-#map {
-    margin: 0;
-    padding: 0;
-    height: 70vh;
 }
 
 body {
@@ -124,6 +95,30 @@ nav a:hover {
 
 nav a.menu_selecionado {
     color: rgb(40, 78, 120);
+}
+
+
+#limparMapa.limparBotao {
+    position: absolute;
+    top: 130px;
+    left: 10px;
+    z-index: 1000;
+    margin: 0;
+    padding: 7px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    border: 2px solid rgba(170, 170, 170, 0.8);
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#limparMapa.limparBotao:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgba(255, 50, 50, 0.8); /* Cor de fundo quando o botão é hover */
 }
 
 #caixa-legenda {
