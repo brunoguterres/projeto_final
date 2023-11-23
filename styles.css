@@ -33,20 +33,26 @@ header {
     font-size: 50px;
     margin-bottom: 50px;
     font-family: sans-serif;
-    color: rgba(40, 78, 140, 0.8);
+    color: rgb(40, 78, 140);
 }
 
-.imagem-recursos-hidricos img{
-    width: 500px;
-    height: auto;
-    padding-left: 50px;
+.texto-tutorial {
+    box-sizing: border-box;
 }
 
-.imagem-area-estudo img{
-    width: 500px;
-    height: auto;
-    padding-right: 50px;
-    padding-top: 100px;
+.texto-tutorial h1 {
+    font-size: 50px;
+    margin-bottom: 50px;
+    font-family: sans-serif;
+    color: rgb(120, 180, 210);
+}
+
+.titulo-tutorial {
+    font-size: 50px;
+    font-family: sans-serif;
+    text-align: center;
+    color: rgb(40, 78, 140);
+    padding: 50px 0;
 }
 
 .paragrafo {
@@ -60,12 +66,34 @@ header {
     text-indent: 50px;
 }
 
-.titulo-tutorial {
-    font-size: 50px;
-    font-family: sans-serif;
-    text-align: center;
-    color: rgba(40, 78, 140, 0.8);
-    padding: 50px 0;
+.imagem-recursos-hidricos img{
+    width: 500px;
+    height: auto;
+    padding-left: 50px;
+}
+
+.imagem-area-estudo img{
+    width: 500px;
+    height: auto;
+    padding-right: 50px;
+}
+
+.imagem-tutorial-1 img{
+    width: 500px;
+    height: auto;
+    padding-left: 50px;
+}
+
+.imagem-tutorial-2 img{
+    width: 500px;
+    height: auto;
+    padding-right: 50px;
+}
+
+.imagem-tutorial-3 img{
+    width: 500px;
+    height: auto;
+    padding-left: 50px;
 }
 
 body {
@@ -116,7 +144,6 @@ nav a:hover {
 nav a.menu_selecionado {
     color: rgb(40, 78, 120);
 }
-
 
 #limparMapa.limparBotao {
     position: absolute;
