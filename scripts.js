@@ -23,16 +23,16 @@ function selecaoMontante(feature, layer) {
             cobaciaEdit = cobaciaEdit.slice(0, -1);
         };
         
-        ottobaciasMontante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
-            layers: 'hidrogis:ottobacias_AI_IG6_ISR',
+        ottobaciasMontante = L.Geoserver.wms('http://10.5.3.18:8080/geoserver/wms', {
+            layers: 'iguacu:ottobacias_isr_iguacu',
             attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
         ottobaciasMontante.addTo(map);
         statusOttobaciasMontante = true;
 
-        outorgasMontante = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
-            layers: 'hidrogis:outorgas_AI_IG6_CNARH',
+        outorgasMontante = L.Geoserver.wms('http://10.5.3.18:8080/geoserver/wms', {
+            layers: 'iguacu:outorgas_iguacu',
             attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
             CQL_FILTER: "cobacia_n LIKE '"+cobaciaEdit+"%' AND cobacia_n >= '"+cobaciaValue+"'",
         });
@@ -61,13 +61,13 @@ var baseGoogleStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y
     attribution: '<a href="https://www.google.com/maps">Google Streets</a>'
 });
 
-var ottotrechos = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
-    layers: 'hidrogis:ottotrechos_AI_IG6',
+var ottotrechos = L.Geoserver.wms('http://10.5.3.18:8080/geoserver/wms', {
+    layers: 'iguacu:ottotrechos_iguacu',
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
 });
 
-var ottobacias = L.Geoserver.wfs('http://191.252.221.146:8080/geoserver/wfs', {
-    layers: 'hidrogis:ottobacias_AI_IG6',
+var ottobacias = L.Geoserver.wfs('http://10.5.3.18:8080/geoserver/wfs', {
+    layers: 'iguacu:ottobacias_isr_iguacu',
     fitLayer: true,
     style: {
         color: "rgba(35, 150, 160, 1)",
@@ -101,8 +101,8 @@ layerControl.addTo(map);
 statusOttotrechos = true;
 statusOttobacias = true;
 
-var limiteBacia = L.Geoserver.wms('http://191.252.221.146:8080/geoserver/wms', {
-    layers: 'hidrogis:bacia_AI_IG6',
+var limiteBacia = L.Geoserver.wms('http://10.5.3.18:8080/geoserver/wms', {
+    layers: 'iguacu:bacia_iguacu',
     attribution: '<a href="https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/f7b1fc91-f5bc-4d0d-9f4f-f4e5061e5d8f">ANA</a>',
 });
 limiteBacia.addTo(map);
